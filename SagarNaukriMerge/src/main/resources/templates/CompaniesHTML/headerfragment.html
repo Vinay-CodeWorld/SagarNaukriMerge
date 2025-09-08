@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+
+</head>
+<body>
+<div th:fragment="siteheader(comdata)" >
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="#" style="color:#4e73df;"><img th:src="@{../Images/websitelogo.png}" width="45px" height="45px">JobSagar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/back}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Jobs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/company/getapplicants">Applications</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/company/profile">Profile</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <div class="dropdown">
+                        <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="dropdownUser"
+                           data-bs-toggle="dropdown">
+                            <img th:if="${comdata.companylogo != null}" th:src="@{/companylogo}"
+                                 class="rounded-circle me-2" width="40" height="40">
+                            <div th:unless="${comdata.companylogo != null}">
+                                 <i class="fas fa-user-circle rounded-circle me-2 fs-1"></i>
+                            </div>
+                            <span class="d-none d-sm-inline text-dark" th:text="${comdata.companyname}"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" th:href="@{/company/profile}"><i class="fas fa-user me-2"></i>Company Profile</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" th:href="@{/logout}"><i class="fas fa-sign-in-alt me-2"></i>Sign out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<div th:fragment="sidediv(comdata)">
+    <div class="">
+        <div class="sidebar p-3 sticky-top">
+            <div class="text-center mb-3">
+                <div class="text-center mb-3">
+                    <a th:href="@{/company/profile}"><img th:if="${comdata.companylogo != null}" th:src="@{/companylogo}"
+                         class="profile-img rounded-circle mb-2" alt="Profile Picture"></a>
+
+                    <img th:unless="${comdata.companylogo != null}"
+                         th:src="@{../Images/websitelogo.png}"
+                         class="profile-img rounded-circle mb-2" alt="Default Profile Picture">
+                </div>
+
+                <h5 th:text="${comdata.companyname}"></h5>
+                <p class="text-muted">Company</p>
+                <a th:href="@{/company/update}" class="btn btn-primary btn-sm"><i class="fas fa-edit me-1"></i>Edit Profile</a>
+            </div>
+            <hr>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link sidebar-link active" href="#">
+                        <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link sidebar-link " href="#company-profile">
+                        <i class="fas fa-user me-2"></i>Company Profile
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link sidebar-link" href="#jobs">
+                        <i class="fas fa-briefcase me-2"></i>Jobs
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link sidebar-link" href="#experience">
+                        <i class="fas fa-info-circle me-2"></i>About
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link sidebar-link" href="#skills">
+                        <i class="fa-solid fa-thumbs-up me-2"></i>Review & Rating
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        const links = document.querySelectorAll('.sidebar-link');
+        links.forEach(link => {
+        link.addEventListener('click', function () {
+            links.forEach(link => link.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+    </script>
+</div>
+</body>
+</html>

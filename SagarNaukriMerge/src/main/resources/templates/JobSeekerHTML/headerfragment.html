@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm" th:fragment="siteheader(jobSeeker)">
+  <div class="container">
+    <a class="navbar-brand" th:href="@{/jobseeker/dashboard}">
+      <img th:src="@{/websitelogo.png}" alt="Company Logo" style="height: 30px; margin-right: 8px;">
+      JobSeeker
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/jobseeker/dashboard}">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/alljobs">Jobs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/jobseeker/applications}">Applications</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/jobseeker/conversations}"><i class="fas fa-comments me-1"></i>Messages</a>
+        </li>
+      </ul>
+      <div class="d-flex align-items-center">
+        <div class="dropdown">
+          <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle"
+             id="dropdownUser" data-bs-toggle="dropdown">
+            <img th:if="${jobSeeker.profilePicture != null}" th:src="@{/jobseeker/profile-picture}"
+                 class="rounded-circle me-2" width="40" height="40">
+            <img th:unless="${jobSeeker.profilePicture != null}"
+                 th:src="@{'https://ui-avatars.com/api/?name=' + ${jobSeeker.name.replace(' ','+')} + '&size=40&background=random'}"
+                 class="rounded-circle me-2" width="40" height="40">
+            <span class="d-none d-sm-inline" th:text="${jobSeeker.name}">John Doe</span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" th:href="@{/jobseeker/profile}"><i class="fas fa-user me-2"></i>Profile</a></li>
+            <li><a class="dropdown-item" th:href="@{/jobseeker/edit}"><i class="fas fa-user-edit me-2"></i>Edit Profile</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" th:href="@{/jobseeker/logout}"><i class="fas fa-sign-out-alt me-2"></i>Sign out</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+</body>
+</html>
